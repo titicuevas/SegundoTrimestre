@@ -15,7 +15,9 @@ class MonografiaController extends Controller
      */
     public function index()
     {
-        //
+        $monografia = Monografia::all();
+
+        return view ('monografia.index',['monografias'=>$monografia,]);
     }
 
     /**
@@ -25,7 +27,7 @@ class MonografiaController extends Controller
      */
     public function create()
     {
-        //
+        return view ('monografia.create');
     }
 
     /**
@@ -36,7 +38,14 @@ class MonografiaController extends Controller
      */
     public function store(StoremonografiaRequest $request)
     {
-        //
+        $request->validated();
+        $monografia= new Monografia();
+        $monografia->titulo=$request->titulo;
+        $monografia->anyo=$request->anyo;
+        $monografia->save();
+        return redirect()->route('monografias.index')->with('succes','monografia creada');
+
+
     }
 
     /**
@@ -47,7 +56,9 @@ class MonografiaController extends Controller
      */
     public function show(monografia $monografia)
     {
-        //
+        return view('monografia.show',[
+            'monografia'=>$monografia
+        ]);
     }
 
     /**
@@ -58,7 +69,10 @@ class MonografiaController extends Controller
      */
     public function edit(monografia $monografia)
     {
-        //
+        return view('monografia.edit',
+        [
+            'monografia'=>$monografia,
+        ]);
     }
 
     /**
@@ -70,7 +84,12 @@ class MonografiaController extends Controller
      */
     public function update(UpdatemonografiaRequest $request, monografia $monografia)
     {
-        //
+        $request->validated();
+        $monografia->titulo=$request->titulo;
+        $monografia->anyo=$request->anyo;
+        $monografia->save();
+        return redirect()->route('monografias.index')->with('succes','Actualizado los datos');
+
     }
 
     /**
@@ -81,6 +100,7 @@ class MonografiaController extends Controller
      */
     public function destroy(monografia $monografia)
     {
-        //
+        $monografia->delete();
+        return redirect()->route('monografias.index')->with('success','Borrado correctamente');
     }
 }

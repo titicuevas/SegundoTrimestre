@@ -5,7 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class monografia extends Model
+class Monografia extends Model
 {
+
     use HasFactory;
+
+    public function articulos(){
+        return $this->belongsToMany(Articulos::class);
+    }
+
 }
