@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Monografia extends Model
 {
 
+    protected $fillable = [
+        'titulo',
+        'anyo',
+    ];
+
     use HasFactory;
 
     public function articulos(){

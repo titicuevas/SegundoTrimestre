@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreMonografiaRequest extends FormRequest
 {
@@ -13,7 +14,8 @@ class StoreMonografiaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
+        //return Auth::user()->name='admin';
     }
 
     /**
@@ -24,7 +26,10 @@ class StoreMonografiaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'titulo'=>'required|string',
+            'anyo'=>'required|date',
+
+
         ];
     }
 }
